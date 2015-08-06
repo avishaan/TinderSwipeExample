@@ -43,22 +43,32 @@
                                     <outletCollection property="gestureRecognizers" destination="Xgy-BZ-zAy" appends="YES" id="Uue-vs-3rh"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4kV-r6-mXj" customClass="CHSwipeView" customModule="swipeLearn" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="102" y="28" width="197" height="145"/>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="Nzc-bH-sFx"/>
+                                <exclude reference="4kV-r6-mXj"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="Nzc-bH-sFx"/>
+                                <include reference="4kV-r6-mXj"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="containerView" destination="Nzc-bH-sFx" id="FQw-YE-A2b"/>
+                        <outlet property="swipeView" destination="4kV-r6-mXj" id="udF-Yd-egT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

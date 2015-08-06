@@ -15,6 +15,8 @@ class ViewController: UIViewController {
   var containerViewStartingValues:(center:CGPoint, transform:CGAffineTransform)?
   var updatedLocation:CGPoint!
   
+  @IBOutlet weak var swipeView: CHSwipeView!
+  
   // which way to remove the view
   enum RemoveDirection {
     case Left
@@ -23,7 +25,7 @@ class ViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view, typically from a nib. 
   }
 
   override func didReceiveMemoryWarning() {

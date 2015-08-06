@@ -13,6 +13,7 @@
 		8270410D1B72C9770010531B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8270410C1B72C9770010531B /* Images.xcassets */; };
 		827041101B72C9770010531B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8270410E1B72C9770010531B /* LaunchScreen.xib */; };
 		8270411C1B72C9780010531B /* swipeLearnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8270411B1B72C9780010531B /* swipeLearnTests.swift */; };
+		827041261B7310C70010531B /* CHSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827041251B7310C70010531B /* CHSwipeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		827041151B72C9780010531B /* swipeLearnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = swipeLearnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8270411A1B72C9780010531B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8270411B1B72C9780010531B /* swipeLearnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swipeLearnTests.swift; sourceTree = "<group>"; };
+		827041251B7310C70010531B /* CHSwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHSwipeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				827041051B72C9770010531B /* AppDelegate.swift */,
 				827041071B72C9770010531B /* ViewController.swift */,
+				827041251B7310C70010531B /* CHSwipeView.swift */,
 				827041091B72C9770010531B /* Main.storyboard */,
 				8270410C1B72C9770010531B /* Images.xcassets */,
 				8270410E1B72C9770010531B /* LaunchScreen.xib */,
@@ -214,6 +217,7 @@
 			files = (
 				827041081B72C9770010531B /* ViewController.swift in Sources */,
 				827041061B72C9770010531B /* AppDelegate.swift in Sources */,
+				827041261B7310C70010531B /* CHSwipeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
