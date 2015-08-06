@@ -52,7 +52,12 @@ class ViewController: UIViewController {
       println("ended movement")
       // check if gesture is past bounds
       if isGesturePastBounds(sender) {
-        println("remove view")
+        // remove the view in the direction based on which side it ended up on
+        if (sender.view!.center.x < containerViewStartingValues!.center.x) {
+          self.removeViewFromParent(containerView, direction: .Left)
+        } else {
+          self.removeViewFromParent(containerView, direction: .Right)
+        }
       } else {
         resetViewToStartingValues(containerView, sender: sender)
       }
@@ -69,6 +74,29 @@ class ViewController: UIViewController {
       view.transform = CGAffineTransformMakeRotation(0)
 //      self.shouldShowShadow(false)
       }, completion: {success in })
+  }
+  
+  func removeViewFromParent(view: UIView, direction: RemoveDirection) {
+    
+    var animations:(()->Void)!
+    switch direction {
+    case .Left:
+      animations = {view.center.x = -(UIScreen.mainScreen().bounds.width)}
+    case .Right:
+      animations = {view.center.x = UIScreen.mainScreen().bounds.width}
+    default:
+      break
+    }
+    
+    UIView.animateWithDuration(0.2, animations: animations , completion: {success in view.removeFromSuperview()})
+
+//    UIView.animateWithDuration(0.2, animations: {
+//      view.center.x = view.center.x - 1000
+//      },
+//      completion: {success in
+//        view.removeFromSuperview()
+//      })
+    
   }
   
   func saveViewStartingValues(view: UIView){
