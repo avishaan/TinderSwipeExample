@@ -40,8 +40,6 @@ class CHSwipeView: UIView {
   
   // use this init for storyboard init(coder) or programmatic init(frame)
   private func myInit() {
-    originalOrientation = (center: self.center, transform: self.transform)
-    
     self.gestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("onViewSwipe:"))
     self.addGestureRecognizer(self.gestureRecognizer)
   }
@@ -51,24 +49,30 @@ class CHSwipeView: UIView {
     switch(gesture.state){
     case UIGestureRecognizerState.Began:
       println("Began")
+      originalOrientation = (center: self.center, transform: self.transform)
     
     case UIGestureRecognizerState.Changed:
       let translation = gesture.translationInView(self.superview!)
       gesture.view!.center = CGPoint(x: gesture.view!.center.x + translation.x, y: gesture.view!.center.y + translation.y)
       gesture.setTranslation(CGPointZero, inView: self)
       
-      let newLocation = gesture.view!.center
-      
-      println("Changed")
-      
     case UIGestureRecognizerState.Ended:
-      println("Ended")
+      self.resetViewOrientation()
     
     default:
       println("Default")
       
     }
     
+  }
+  func resetViewOrientation() {
+    
+//    println("view \(view.center) vs start \(self.containerViewStartingValues!.center)")
+    UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: .CurveEaseInOut, animations: {
+      self.center = self.originalOrientation.center
+      self.transform = CGAffineTransformMakeRotation(0)
+//      self.shouldShowShadow(false)
+      }, completion: {success in })
   }
 
 }
