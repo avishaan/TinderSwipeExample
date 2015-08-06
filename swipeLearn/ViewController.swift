@@ -15,6 +15,12 @@ class ViewController: UIViewController {
   var containerViewStartingValues:(center:CGPoint, transform:CGAffineTransform)?
   var updatedLocation:CGPoint!
   
+  // which way to remove the view
+  enum RemoveDirection {
+    case Left
+    case Right
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
@@ -40,9 +46,16 @@ class ViewController: UIViewController {
       updatedLocation = sender.view!.center
       println("sender: \(sender.view!.center) vs: \(self.view.center)")
       
+      isGesturePastBounds(sender)
+      
     case .Ended:
       println("ended movement")
-      resetViewToStartingValues(containerView, sender: sender)
+      // check if gesture is past bounds
+      if isGesturePastBounds(sender) {
+        println("remove view")
+      } else {
+        resetViewToStartingValues(containerView, sender: sender)
+      }
     default:
       // nothing
       var test = 0;
@@ -60,6 +73,20 @@ class ViewController: UIViewController {
   
   func saveViewStartingValues(view: UIView){
     containerViewStartingValues = (view.center, view.transform)
+  }
+  
+  // did the gesture go too far
+  func isGesturePastBounds(gesture: UIPanGestureRecognizer) -> Bool {
+    let origCenter = containerViewStartingValues!.center
+    
+    // see how far we have moved the view as a ratio
+    let ratioMoved = abs(gesture.view!.center.x - origCenter.x) / origCenter.x
+//    println("ratio: \(ratioMoved)")
+    if ratioMoved > 0.6 {
+      return true
+    } else {
+      return false
+    }
   }
 
 }
