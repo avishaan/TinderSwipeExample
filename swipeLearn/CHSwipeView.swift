@@ -48,7 +48,6 @@ class CHSwipeView: UIView {
     
     switch(gesture.state){
     case UIGestureRecognizerState.Began:
-      println("Began")
       originalOrientation = (center: self.center, transform: self.transform)
     
     case UIGestureRecognizerState.Changed:
@@ -59,7 +58,13 @@ class CHSwipeView: UIView {
     case UIGestureRecognizerState.Ended:
       // was the view swiped too far?
       if isGesturePastBounds() {
-        println("too far too far")
+        // which way did it get swiped?
+        switch swipeDirection() {
+        case .Left:
+          swipeAwayView(direction: .Left)
+        case .Right:
+          swipeAwayView(direction: .Right)
+        }
         
       } else {
         // nope: put it back in place
@@ -68,10 +73,23 @@ class CHSwipeView: UIView {
     
     default:
       println("Default")
-      
     }
     
   }
+  
+  func swipeAwayView(#direction: RemoveDirection) {
+    var animations:(()->Void)!
+    
+    switch direction {
+    case .Left:
+      animations = { self.center.x = -(UIScreen.mainScreen().bounds.width) }
+    case .Right:
+      animations = { self.center.x = UIScreen.mainScreen().bounds.width }
+    }
+    
+    UIView.animateWithDuration(0.3, animations: animations, completion: { isSuccess in self.removeFromSuperview()})
+  }
+  
   func resetViewOrientation() {
 //    println("view \(view.center) vs start \(self.containerViewStartingValues!.center)")
     UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: .CurveEaseInOut, animations: {
@@ -89,6 +107,15 @@ class CHSwipeView: UIView {
       return true
     } else {
       return false
+    }
+  }
+  
+  func swipeDirection() -> RemoveDirection {
+    // is the gesture to the left of the original location?
+    if (gestureRecognizer.view!.center.x < originalOrientation.center.x) {
+      return .Left
+    } else {
+      return .Right
     }
   }
 
