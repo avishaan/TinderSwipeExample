@@ -57,7 +57,14 @@ class CHSwipeView: UIView {
       gesture.setTranslation(CGPointZero, inView: self)
       
     case UIGestureRecognizerState.Ended:
-      self.resetViewOrientation()
+      // was the view swiped too far?
+      if isGesturePastBounds() {
+        println("too far too far")
+        
+      } else {
+        // nope: put it back in place
+        self.resetViewOrientation()
+      }
     
     default:
       println("Default")
@@ -66,13 +73,23 @@ class CHSwipeView: UIView {
     
   }
   func resetViewOrientation() {
-    
 //    println("view \(view.center) vs start \(self.containerViewStartingValues!.center)")
     UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: .CurveEaseInOut, animations: {
       self.center = self.originalOrientation.center
       self.transform = CGAffineTransformMakeRotation(0)
 //      self.shouldShowShadow(false)
       }, completion: {success in })
+  }
+  
+  func isGesturePastBounds() -> Bool {
+    let orig = originalOrientation.center
+    // see how far we have moved as a ratio
+    let ratioMoved = abs(gestureRecognizer.view!.center.x - orig.x) / orig.x
+    if ratioMoved > 0.6 {
+      return true
+    } else {
+      return false
+    }
   }
 
 }
