@@ -28,13 +28,13 @@ class CHSwipeView: UIView {
   }
   
   override init(frame: CGRect) {
-    println("init frame")
+//    println("init frame")
     super.init(frame: frame)
   }
 
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    println("init coder")
+//    println("init coder")
     self.myInit()
   }
   
@@ -87,7 +87,7 @@ class CHSwipeView: UIView {
       animations = { self.center.x = UIScreen.mainScreen().bounds.width }
     }
     
-    UIView.animateWithDuration(0.3, animations: animations, completion: { isSuccess in self.removeFromSuperview()})
+    UIView.animateWithDuration(0.3, animations: animations, completion: { isSuccess in self.removeFromSuperview() })
   }
   
   func resetViewOrientation() {
